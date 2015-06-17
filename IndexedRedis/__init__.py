@@ -22,7 +22,10 @@ except NameError:
 
 if bytes == str:
 	# Python 2, no additional decoding necessary.
-	tostr = str
+	def tostr(x):
+		if isinstance(x, unicode):
+			return x.encode('utf-8')
+		return str(x)
 	decodeDict = lambda x : x
 else:
 	# Python 3, additional decoding necessary
